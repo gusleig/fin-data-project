@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% set active_page = "realtime" %}
+{% block content %}
+<div class="container">
+<h2> Realtime 1m candles </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time (UTC)</th>
+            <th scope="col">Ticker</th>
+            <th scope="col">Open</th>
+            <th scope="col">High</th>
+            <th scope="col">Low</th>
+            <th scope="col">Close</th>
+            <th scope="col">Volume</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for index, item in data %}
+        <tr>
+            <th scope="row">{{ index + 1 }}</th>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+            <td>{{ item[6] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <p class="lead">Last update: {{ date }}</p>
+</div>
+<script language="JavaScript">
+    function updateTemp(id, selector) {
+        $.getJSON('/realtime/', function(data){
+        $(selector).text = response.temp;
+  })
+}
+
+setInterval('updateTemp(1, "#gauge-1")', 1000 * 60);
+</script>
+{% endblock %}

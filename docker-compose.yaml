@@ -1,0 +1,60 @@
+---
+version: '3'
+services:
+  timescaledb:
+    build:
+      context: .
+      dockerfile: Dockerfile.timescaledb
+    ports:
+      - 8001:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Crypto123
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
+    volumes:
+      - ./app:/app
+      - ./.env:/app/.env
+      - ./db-init-scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
+
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    depends_on:
+      - timescaledb
+    environment:
+      BINANCE_API_KEY: ${BINANCE_API_KEY}
+      BINANCE_API_SECRET: ${BINANCE_API_SECRET}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB: postgresql+psycopg2://${DB_USERNAME}:${DB_PASSWORD}@timescaledb:5432/${DB_NAME}
+    volumes:
+      - ./app:/app
+      - ./.env:/app/.env
+    command: >
+         bash -c "sleep 30; python3 /app/app-historical.py; python3 /app/app.py"
+
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    ports:
+      - 5029:5029
+    volumes:
+      - ./app:/app
+      - ./.env:/app/.env
+    depends_on:
+      - timescaledb
+      - python
+    environment:
+        DB_HOST: timescaledb
+        DB_USERNAME: ${DB_USERNAME}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_NAME: ${DB_NAME}
+        FLASK_PORT: 5029
+    command: python3 /app/app-flask.py
+         

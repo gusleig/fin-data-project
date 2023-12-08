@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% set active_page = "about" %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron .container-fluid ">
+        <h2 class="display-4">This Project </h2>
+        <hr/>
+        <p class="lead">This project is a simple example of how to use Python, Postgresql with Timescaledb, Flask & Docker to create a simple data pipeline.</p>
+        <p class="lead">The data is collected from Binance API and stored in a Postgresql database in tables indexed with Timescaledb . </p>
+        <p class="lead">With the data stored in Postgresql, we can use advanced queries with timescaledb unique features, which helps creating a simple dashboard using Flask.</p>
+        <h2 class="display-4">What could be improved for scaling? </h2>
+
+        <p class="lead">The data pipeline could be improved by using Kafka for handling the realtime data. </p>
+        <p class="lead">Kafka could sink the data into Apache spark . </p>
+        <p class="lead">Apache Spark could persist the data into PostgreSQLwith TimescaleDB extension. </p>
+        <p class="lead">With our data persisted, we could then create the dashboards using Grafana, Superset or other tools . </p>
+
+    </div>
+    <div class="jumbotron .container-fluid ">
+        <img src="/static/gus_github2023.png" class="img-fluid" alt="Responsive image">
+        <h2 class="display-4">Gustavo Leig </h2>
+        <h3 class="display-4">Data Engineer Profile</h3>
+        <hr/>
+
+        <p class="lead">I'm a Data Engineer and Electrical Engineer, I combine technical skills and ability to work in agile team environments with great communication proficiency. With more than 15 years of experience working with data, from on premises to cloud computing, I faced many real world challenges. I really enjoy the opportunities that makes me develop critical thinking and use my problem-solving skills using data driven solutions.</p>
+
+        <p class="lead">My credentials includes a Bachelor in Electrical Engineer, a Master in Business, an Oracle Cloud Architect Associate and Airflow certification.</p>
+
+        <h3 class="display-4">Tech stack:</h3>
+
+        <p class="lead">Big Data, SQL, Python, Airflow, Data Engineering.</p>
+
+        <h3 class="display-4">Where to find me:</h3>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" role="button" href="https://github.com/gusleig">Github Profile</a>
+            <a class="btn btn-primary btn-lg" role="button" href="https://www.linkedin.com/in/gleig/">Linkedin</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

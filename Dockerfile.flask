@@ -1,0 +1,15 @@
+FROM python:3.9-slim-buster
+RUN apt-get update && apt-get install -y \
+    software-properties-common
+RUN apt-get install libpq-dev -y
+
+COPY requirements.txt /requirements.txt
+
+RUN pip install --user --upgrade pip
+RUN pip uninstall binance -y
+RUN pip install --no-cache-dir --user -r /requirements.txt
+
+ENV FLASK_APP=app-flask.py
+ENV FLASK_DEBUG=True
+EXPOSE 5029
+WORKDIR /app

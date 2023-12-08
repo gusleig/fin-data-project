@@ -1,0 +1,34 @@
+{% extends "bootstrap/base.html" %}
+
+{% set navigation_bar = [
+    ('/', 'index', 'Index'),
+    ('/daily', 'daily', 'Daily'),
+    ('/realtime', 'realtime', 'Realtime'),
+    ('/about/', 'about', 'About'),
+] -%}
+
+<link rel='icon' href='favicon.ico' type='image/x-icon' sizes="16x16" />
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Crypto Info</a>
+    </div>
+    <ul class="nav navbar-nav">
+        {% set active_page = active_page|default('index') -%}
+
+        {% for href, id, caption in navigation_bar %}
+            <li{% if id == active_page %} class="active"{% endif
+            %}>
+            <a href="{{ href|e }}">{{ caption|e }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
