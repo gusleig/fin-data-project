@@ -17,3 +17,5 @@ Create a .env file in the root of the project and add the following variables
 Please make sure you have docker desktop installed and running
 
 `docker-compose up --build -d` 
+
+Open your browser and go to http://127.0.0.1:5029/
