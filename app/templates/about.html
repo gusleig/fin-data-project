@@ -6,8 +6,12 @@
         <h2 class="display-4">This Project </h2>
         <hr/>
         <p class="lead">This project is a simple example of how to use Python, Postgresql with Timescaledb, Flask & Docker to create a simple data pipeline.</p>
-        <p class="lead">The data is collected from Binance API and stored in a Postgresql database in tables indexed with Timescaledb . </p>
-        <p class="lead">With the data stored in Postgresql, we can use advanced queries with timescaledb unique features, which helps creating a simple dashboard using Flask.</p>
+        <p class="lead">It was developed in my Macbook using PyCharm IDE.</p>
+        <h3>How the pipeline works?</h3>
+        <p class="lead">The data is collected from Binance API, we used historical data (last 30 days of 5min candles) and stored in a Postgresql database in a table called crypto_hist_ht indexed with Timescaledb . </p>
+        <p class="lead">I also used websocket to get data from Binance in realtime and stored in a table called crypto_ht. </p>
+        <p class="lead">With the data stored in Postgresql, we could use advanced queries with timescaledb unique features, </p>
+        <p class="lead">The Flask dashboard can be accessed at <a target="_blank" rel="noopener noreferrer" href="http://127.0.0.1:5029/">http://127.0.0.1:5029/</a></p>
 
         <h2 class="display-4">What could be improved for scaling? </h2>
 
